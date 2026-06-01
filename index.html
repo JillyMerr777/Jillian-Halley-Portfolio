@@ -32,33 +32,16 @@
     </header>
 
     <main id="main-content">
-      <section class="container hero reveal">
-        <div class="hero-visual reveal" aria-label="Jillian portrait and role details">
-          <figure class="hero-portrait-card">
-            <img src="Jillian_Profile_Photo.jpg" alt="Portrait of Jillian Halley" />
-            <span class="hero-floating-pill">Senior Experience Consultant</span>
-            <figcaption>
-              Product design leadership grounded in strategy, craft, and measurable business impact.
-            </figcaption>
+      <section class="container hero parallax-stage reveal" aria-label="Jillian homepage hero">
+        <div class="hero-atmosphere" aria-hidden="true">
+          <div class="hero-grid-overlay" data-parallax data-depth="0.04"></div>
+          <figure class="hero-silhouette" data-parallax data-depth="0.16">
+            <img src="Jillian_Profile_Photo.jpg" alt="" />
           </figure>
-
-          <aside class="hero-panel" aria-label="Current role and affiliation">
-            <div class="panel-content">
-              <p class="panel-title">Current Role</p>
-              <h2 class="panel-heading">Senior Experience Consultant, Product Design</h2>
-              <p class="panel-copy">
-                Jillian partners with client leaders, product teams, and engineers to convert ambiguity into clear
-                direction and measurable outcomes.
-              </p>
-              <div class="slalom-lockup">
-                <img src="slalom-logo-white-1500x400.png" alt="Slalom logo" />
-                <p>Agency affiliation: Slalom</p>
-              </div>
-            </div>
-          </aside>
+          <div class="hero-gradient-orb" data-parallax data-depth="0.1"></div>
         </div>
 
-        <div class="hero-copy">
+        <div class="hero-copy" data-parallax data-depth="0.08">
           <p class="eyebrow">Product Design Portfolio</p>
           <h1>Jillian Halley designs digital products that align strategy, craft, and growth.</h1>
           <p class="lead">
@@ -73,6 +56,33 @@
             </a>
           </div>
         </div>
+
+        <aside class="hero-panel" aria-label="Current role and affiliation" data-parallax data-depth="0.13">
+          <div class="panel-content">
+            <div class="panel-topline">
+              <p class="panel-title">Current Role</p>
+              <p class="client-days" aria-live="polite">
+                Current client happy for
+                <strong><span data-client-days>0</span> days</strong>
+              </p>
+            </div>
+            <h2 class="panel-heading">Senior Experience Consultant, Product Design</h2>
+            <p class="panel-copy">
+              Jillian partners with client leaders, product teams, and engineers to convert ambiguity into clear
+              direction and measurable outcomes.
+            </p>
+            <div class="client-lockup">
+              <div class="rc-logo-swatch" role="img" aria-label="Royal Caribbean"></div>
+              <p>Current client: Royal Caribbean Group</p>
+            </div>
+            <div class="slalom-lockup">
+              <img src="slalom-logo-white-1500x400.png" alt="Slalom logo" />
+              <p>Agency affiliation: Slalom</p>
+            </div>
+          </div>
+        </aside>
+
+        <p class="hero-scroll-cue">Scroll to move deeper into the work</p>
       </section>
 
       <section class="container section-block reveal" aria-labelledby="impact-heading">
@@ -97,6 +107,41 @@
             <div class="stat-number" data-value="30" data-suffix="+">0</div>
             <p class="stat-label">Design team collaborators</p>
           </article>
+        </div>
+      </section>
+
+      <section class="container section-block logo-carousel-section reveal" aria-labelledby="client-logos-heading">
+        <div class="section-head">
+          <h2 id="client-logos-heading">Client Footprint</h2>
+          <p>A moving snapshot of organizations Jillian has supported across delivery and strategic initiatives.</p>
+        </div>
+        <div class="logo-marquee" aria-label="Client logo carousel">
+          <div class="logo-track">
+            <img src="assets/client-logos/takeda.png" alt="Takeda" />
+            <img src="assets/client-logos/bcg.png" alt="Boston Consulting Group" />
+            <img src="assets/client-logos/mohegan.png" alt="Mohegan" />
+            <img src="assets/client-logos/fidelity.png" alt="Fidelity" />
+            <img src="assets/client-logos/mass-general-brigham.png" alt="Mass General Brigham" />
+            <img src="assets/client-logos/bny.png" alt="BNY" />
+            <img src="assets/client-logos/snhu.png" alt="Southern New Hampshire University" />
+            <img src="assets/client-logos/ihg.png" alt="IHG Hotels and Resorts" />
+            <img src="assets/client-logos/moderna.png" alt="Moderna" />
+            <img src="assets/client-logos/insulet.png" alt="Insulet" />
+            <img src="assets/client-logos/marriott.png" alt="Marriott" />
+          </div>
+          <div class="logo-track" aria-hidden="true">
+            <img src="assets/client-logos/takeda.png" alt="" />
+            <img src="assets/client-logos/bcg.png" alt="" />
+            <img src="assets/client-logos/mohegan.png" alt="" />
+            <img src="assets/client-logos/fidelity.png" alt="" />
+            <img src="assets/client-logos/mass-general-brigham.png" alt="" />
+            <img src="assets/client-logos/bny.png" alt="" />
+            <img src="assets/client-logos/snhu.png" alt="" />
+            <img src="assets/client-logos/ihg.png" alt="" />
+            <img src="assets/client-logos/moderna.png" alt="" />
+            <img src="assets/client-logos/insulet.png" alt="" />
+            <img src="assets/client-logos/marriott.png" alt="" />
+          </div>
         </div>
       </section>
 

@@ -79,6 +79,16 @@
     node.textContent = String(year);
   });
 
+  var clientDaysNode = document.querySelector('[data-client-days]');
+  if (clientDaysNode) {
+    var clientStartDate = new Date(Date.UTC(2023, 9, 28));
+    var now = new Date();
+    var todayUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    var elapsedMs = todayUtc.getTime() - clientStartDate.getTime();
+    var elapsedDays = Math.max(0, Math.floor(elapsedMs / 86400000));
+    clientDaysNode.textContent = String(elapsedDays);
+  }
+
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var revealNodes = document.querySelectorAll('.reveal');
