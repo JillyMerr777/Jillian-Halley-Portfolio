@@ -11,7 +11,7 @@
     behanceUrl: '#',
     dribbbleUrl: '#',
     calendlyUrl: '#',
-    capabilityViewMode: 'inspiration',
+    capabilityViewMode: 'classic',
     contactFormEndpoint: ''
   };
 
@@ -410,28 +410,111 @@
 
   if (capabilityCards.length && capabilityTitle && capabilityCopy) {
     var initialView = defaultCapabilityView;
-    try {
-      var storedView = window.localStorage.getItem('capabilityViewMode');
-      if (storedView) {
-        initialView = storedView;
+    if (capabilityViewButtons.length) {
+      try {
+        var storedView = window.localStorage.getItem('capabilityViewMode');
+        if (storedView) {
+          initialView = storedView;
+        }
+      } catch (error) {
+        // no-op
       }
-    } catch (error) {
-      // no-op
     }
 
     setCapabilityView(initialView, false);
     setCapability(capabilityCards[0]);
 
+    var activeHintCard = null;
+
+    function isClassicCapabilityView() {
+      return rolesPanel && rolesPanel.getAttribute('data-view') === 'classic';
+    }
+
+    function hideCapabilityHint(card) {
+      if (!card) {
+        return;
+      }
+      card.classList.remove('show-hint');
+      card.setAttribute('data-hint-pinned', 'false');
+      card.setAttribute('aria-expanded', 'false');
+      if (activeHintCard === card) {
+        activeHintCard = null;
+      }
+    }
+
+    function showCapabilityHint(card, pinned) {
+      if (!card || !isClassicCapabilityView()) {
+        return;
+      }
+
+      if (activeHintCard && activeHintCard !== card) {
+        hideCapabilityHint(activeHintCard);
+      }
+
+      card.classList.add('show-hint');
+      card.setAttribute('data-hint-pinned', pinned ? 'true' : 'false');
+      card.setAttribute('aria-expanded', 'true');
+      activeHintCard = card;
+    }
+
+    capabilityCards.forEach(function (card, index) {
+      var hint = document.createElement('span');
+      hint.className = 'capability-inline-hint';
+      hint.id = 'capability-hint-' + String(index + 1);
+      hint.setAttribute('role', 'tooltip');
+      hint.textContent = card.dataset.capabilityDesc || '';
+      card.appendChild(hint);
+      card.setAttribute('aria-describedby', hint.id);
+      card.setAttribute('aria-expanded', 'false');
+      card.setAttribute('data-hint-pinned', 'false');
+    });
+
     capabilityCards.forEach(function (card) {
       card.addEventListener('mouseenter', function () {
         setCapability(card);
+        showCapabilityHint(card, false);
+      });
+      card.addEventListener('mouseleave', function () {
+        if (card.getAttribute('data-hint-pinned') !== 'true') {
+          hideCapabilityHint(card);
+        }
       });
       card.addEventListener('focus', function () {
         setCapability(card);
+        showCapabilityHint(card, false);
       });
-      card.addEventListener('click', function () {
+      card.addEventListener('blur', function () {
+        if (card.getAttribute('data-hint-pinned') !== 'true') {
+          hideCapabilityHint(card);
+        }
+      });
+      card.addEventListener('click', function (event) {
+        event.stopPropagation();
         setCapability(card);
+
+        if (!isClassicCapabilityView()) {
+          return;
+        }
+
+        var isPinned = card.getAttribute('data-hint-pinned') === 'true';
+        if (isPinned) {
+          hideCapabilityHint(card);
+        } else {
+          showCapabilityHint(card, true);
+        }
       });
+    });
+
+    document.addEventListener('click', function () {
+      if (activeHintCard) {
+        hideCapabilityHint(activeHintCard);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && activeHintCard) {
+        hideCapabilityHint(activeHintCard);
+      }
     });
   }
 
@@ -439,6 +522,12 @@
     capabilityViewButtons.forEach(function (button) {
       button.addEventListener('click', function () {
         setCapabilityView(button.dataset.capabilityView, true);
+
+        capabilityCards.forEach(function (card) {
+          card.classList.remove('show-hint');
+          card.setAttribute('data-hint-pinned', 'false');
+          card.setAttribute('aria-expanded', 'false');
+        });
       });
     });
   }
