@@ -1,7 +1,7 @@
 window.siteContent = {
   fullName: "Jillian Halley",
   professionalTitle: "Senior Experience Consultant within Product Design at Slalom",
-  contactEmail: "hello@yourdomain.com",
+  contactEmail: "jillian.merrill@slalom.com",
   location: "Boston, MA",
   availability: "Accepting select 2026 engagements",
   resumeUrl: "#",
@@ -10,5 +10,5 @@ window.siteContent = {
   behanceUrl: "#",
   dribbbleUrl: "#",
   calendlyUrl: "#",
-  contactFormEndpoint: ""
+  contactFormEndpoint: "mailto:jillian.merrill@slalom.com?subject=Portfolio%20Inquiry%20for%20Jillian%20Halley"
 };

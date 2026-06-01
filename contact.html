@@ -39,6 +39,10 @@
           Jillian partners with teams that need thoughtful experience strategy, polished product design execution,
           and trusted collaboration.
         </p>
+        <div class="slalom-lockup contact-slalom-lockup" aria-label="Agency affiliation">
+          <img src="slalom-logo-white-1500x400.png" alt="Slalom logo" />
+          <p>Senior Experience Consultant within Product Design at Slalom</p>
+        </div>
       </section>
 
       <section class="contact-grid reveal" aria-label="Contact details">
@@ -50,8 +54,8 @@
           </p>
         </article>
         <article class="contact-card">
-          <h3>Direct Contact</h3>
-          <p>Email: <a data-site-link="contact-email" href="#">hello@yourdomain.com</a></p>
+          <h3>Email Contact</h3>
+          <p>Primary inbox: <a data-site-link="contact-email" href="#">jillian.merrill@slalom.com</a></p>
           <p>Location: <span data-site-text="location">Boston, MA</span></p>
           <p>Availability: <span data-site-text="availability">Accepting select 2026 engagements</span></p>
         </article>
@@ -62,41 +66,37 @@
             <a data-site-link="calendly-url" href="#" target="_blank" rel="noopener">Book Intro Call</a>
           </p>
         </article>
-        <article class="contact-card">
-          <h3>Practice Focus</h3>
-          <p>
-            Experience strategy, service design, UX/UI design, design systems, pursuit storytelling, and
-            cross-functional product team facilitation.
-          </p>
-        </article>
-        <article class="contact-card">
-          <h3>Engagement Scope</h3>
-          <p>
-            Product initiatives, transformation programs, proposal support, and design leadership engagements across
-            industries.
-          </p>
-        </article>
       </section>
 
-      <form class="contact-form reveal" aria-label="Contact form">
+      <form class="contact-form contact-form-classic reveal" aria-label="Contact form">
+        <div class="mail-shell-head" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <p>Compose Message</p>
+        </div>
+
+        <div class="form-field">
+          <label for="to">To</label>
+          <input id="to" name="to" type="text" value="jillian.merrill@slalom.com" readonly />
+        </div>
+
         <div class="form-row">
           <div class="form-field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required />
           </div>
           <div class="form-field">
-            <label for="email">Email</label>
+            <label for="email">From Email</label>
             <input id="email" name="email" type="email" autocomplete="email" required />
           </div>
         </div>
 
         <div class="form-field">
-          <label for="company">Company</label>
-          <input id="company" name="company" type="text" autocomplete="organization" />
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" placeholder="Project inquiry for Jillian Halley" required />
         </div>
 
         <div class="form-field">
-          <label for="message">Project Overview</label>
+          <label for="message">Message</label>
           <textarea
             id="message"
             name="message"
@@ -107,7 +107,7 @@
 
         <button class="btn btn-primary" type="submit">Send Message</button>
         <p class="form-note">
-          Entry point: update contactFormEndpoint in site-content.js when ready to connect Formspree or CRM.
+          Classic email workflow: submitting opens an email draft addressed to Jillian.
         </p>
         <p class="form-status" aria-live="polite"></p>
       </form>

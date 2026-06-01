@@ -49,20 +49,29 @@
           </div>
         </div>
 
-        <aside class="hero-panel reveal" aria-label="Current role and affiliation">
-          <div class="panel-content">
-            <p class="panel-title">Current Role</p>
-            <h2 class="panel-heading">Senior Experience Consultant, Product Design</h2>
-            <p class="panel-copy">
-              Jillian partners with client leaders, product teams, and engineers to convert ambiguity into clear
-              direction and measurable outcomes.
-            </p>
-            <div class="slalom-lockup">
-              <img src="slalom-logo-white-1500x400.png" alt="Slalom logo" />
-              <p>Agency affiliation: Slalom</p>
+        <div class="hero-visual reveal" aria-label="Jillian portrait and role details">
+          <figure class="hero-portrait-card">
+            <img src="Jillian_Profile_Photo.jpg" alt="Portrait of Jillian Halley" />
+            <figcaption>
+              Product design leadership grounded in strategy, craft, and measurable business impact.
+            </figcaption>
+          </figure>
+
+          <aside class="hero-panel" aria-label="Current role and affiliation">
+            <div class="panel-content">
+              <p class="panel-title">Current Role</p>
+              <h2 class="panel-heading">Senior Experience Consultant, Product Design</h2>
+              <p class="panel-copy">
+                Jillian partners with client leaders, product teams, and engineers to convert ambiguity into clear
+                direction and measurable outcomes.
+              </p>
+              <div class="slalom-lockup">
+                <img src="slalom-logo-white-1500x400.png" alt="Slalom logo" />
+                <p>Agency affiliation: Slalom</p>
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
+        </div>
       </section>
 
       <section class="container section-block reveal" aria-labelledby="impact-heading">
@@ -94,31 +103,40 @@
         <div class="section-head">
           <h2 id="skills-heading">Core Skill Set In Motion</h2>
           <p>
-            Scroll to explore Jillian's capabilities moving through layered depth, inspired by modern parallax
-            portfolios.
+            Inspired by modern interactive portfolio patterns, the skill experience combines animated clusters,
+            category filtering, and dynamic detail panels.
           </p>
         </div>
 
-        <div class="parallax-stage" aria-hidden="true">
-          <figure class="parallax-figure" data-parallax data-depth="0.14">
-            <img src="Jillian_Profile_Photo.jpg" alt="Portrait of Jillian Halley" />
-            <figcaption>Jillian Halley</figcaption>
-          </figure>
+        <div class="skills-toolbar" role="toolbar" aria-label="Filter skills by domain">
+          <button class="skill-filter is-active" type="button" data-filter="all">All Skills</button>
+          <button class="skill-filter" type="button" data-filter="strategy">Strategy</button>
+          <button class="skill-filter" type="button" data-filter="ux">UX Craft</button>
+          <button class="skill-filter" type="button" data-filter="systems">Systems</button>
+          <button class="skill-filter" type="button" data-filter="brand">Brand + Visual</button>
+        </div>
 
-          <span class="skill-chip large" data-parallax data-depth="0.32" style="--x: 7%; --y: 12%;">User Experience Design</span>
-          <span class="skill-chip" data-parallax data-depth="0.26" style="--x: 57%; --y: 11%;">User Interface Design</span>
-          <span class="skill-chip" data-parallax data-depth="0.22" style="--x: 16%; --y: 28%;">Responsive Web</span>
-          <span class="skill-chip" data-parallax data-depth="0.35" style="--x: 66%; --y: 26%;">Native iOS &amp; AOS</span>
-          <span class="skill-chip" data-parallax data-depth="0.28" style="--x: 5%; --y: 44%;">User Personas &amp; Journey Mapping</span>
-          <span class="skill-chip" data-parallax data-depth="0.2" style="--x: 70%; --y: 40%;">Wireframing</span>
-          <span class="skill-chip" data-parallax data-depth="0.18" style="--x: 60%; --y: 54%;">Prototyping</span>
-          <span class="skill-chip large" data-parallax data-depth="0.3" style="--x: 9%; --y: 60%;">Accessibility</span>
-          <span class="skill-chip" data-parallax data-depth="0.21" style="--x: 72%; --y: 66%;">Service Design</span>
-          <span class="skill-chip" data-parallax data-depth="0.25" style="--x: 11%; --y: 76%;">Design Systems</span>
-          <span class="skill-chip" data-parallax data-depth="0.2" style="--x: 54%; --y: 78%;">Branding Identity</span>
-          <span class="skill-chip" data-parallax data-depth="0.31" style="--x: 29%; --y: 18%;">Graphic Design</span>
-          <span class="skill-chip" data-parallax data-depth="0.19" style="--x: 31%; --y: 35%;">Illustration</span>
-          <span class="skill-chip" data-parallax data-depth="0.36" style="--x: 31%; --y: 68%;">Animation</span>
+        <div class="skills-lab" id="skills-lab" aria-label="Interactive skill map">
+          <button class="skill-node is-featured" type="button" data-skill-group="strategy" data-depth="0.18" data-skill-label="User Experience Design" data-skill-detail="Designs complete user journeys that connect business priorities with customer outcomes." style="--x: 7%; --y: 15%; --delay: 0.2s;">User Experience Design</button>
+          <button class="skill-node" type="button" data-skill-group="ux" data-depth="0.25" data-skill-label="User Interface Design" data-skill-detail="Builds polished, accessible interfaces that feel cohesive across product ecosystems." style="--x: 58%; --y: 12%; --delay: 0.7s;">User Interface Design</button>
+          <button class="skill-node" type="button" data-skill-group="ux" data-depth="0.31" data-skill-label="Responsive Web" data-skill-detail="Designs adaptable layouts and interaction patterns for desktop, tablet, and mobile contexts." style="--x: 16%; --y: 31%; --delay: 0.3s;">Responsive Web</button>
+          <button class="skill-node" type="button" data-skill-group="ux" data-depth="0.36" data-skill-label="Native iOS &amp; AOS" data-skill-detail="Shapes native mobile experiences tuned for platform conventions and behavior expectations." style="--x: 67%; --y: 28%; --delay: 0.8s;">Native iOS &amp; AOS</button>
+          <button class="skill-node" type="button" data-skill-group="strategy" data-depth="0.22" data-skill-label="User Personas &amp; Journey Mapping" data-skill-detail="Synthesizes insights into practical artifacts that align teams around priority moments." style="--x: 6%; --y: 47%; --delay: 0.55s;">User Personas &amp; Journey Mapping</button>
+          <button class="skill-node" type="button" data-skill-group="ux" data-depth="0.17" data-skill-label="Wireframing" data-skill-detail="Rapidly prototypes information architecture and interaction concepts for early alignment." style="--x: 68%; --y: 44%; --delay: 0.18s;">Wireframing</button>
+          <button class="skill-node" type="button" data-skill-group="ux" data-depth="0.24" data-skill-label="Prototyping" data-skill-detail="Creates high-fidelity interaction prototypes to validate behavior before development." style="--x: 60%; --y: 58%; --delay: 0.9s;">Prototyping</button>
+          <button class="skill-node is-featured" type="button" data-skill-group="strategy" data-depth="0.29" data-skill-label="Accessibility" data-skill-detail="Applies inclusive design standards to ensure products are usable and equitable for all users." style="--x: 9%; --y: 63%; --delay: 0.35s;">Accessibility</button>
+          <button class="skill-node" type="button" data-skill-group="strategy" data-depth="0.34" data-skill-label="Service Design" data-skill-detail="Connects frontstage and backstage experiences to improve full-service journeys." style="--x: 73%; --y: 69%; --delay: 0.6s;">Service Design</button>
+          <button class="skill-node" type="button" data-skill-group="systems" data-depth="0.23" data-skill-label="Design Systems" data-skill-detail="Develops scalable component logic and governance for consistent product delivery." style="--x: 12%; --y: 79%; --delay: 0.45s;">Design Systems</button>
+          <button class="skill-node" type="button" data-skill-group="brand" data-depth="0.2" data-skill-label="Branding Identity" data-skill-detail="Aligns visual language and experience tone to strengthen brand recognition and trust." style="--x: 57%; --y: 81%; --delay: 0.95s;">Branding Identity</button>
+          <button class="skill-node" type="button" data-skill-group="brand" data-depth="0.3" data-skill-label="Graphic Design" data-skill-detail="Creates communication assets that clarify ideas and strengthen narrative impact." style="--x: 31%; --y: 19%; --delay: 0.38s;">Graphic Design</button>
+          <button class="skill-node" type="button" data-skill-group="brand" data-depth="0.27" data-skill-label="Illustration" data-skill-detail="Uses tailored illustration systems to add character, clarity, and emotional resonance." style="--x: 33%; --y: 37%; --delay: 0.65s;">Illustration</button>
+          <button class="skill-node" type="button" data-skill-group="brand" data-depth="0.33" data-skill-label="Animation" data-skill-detail="Designs motion behaviors that guide attention and make interactions feel intuitive." style="--x: 33%; --y: 70%; --delay: 0.84s;">Animation</button>
+
+          <aside class="skills-detail" aria-live="polite">
+            <p class="skills-detail-eyebrow">Skill Spotlight</p>
+            <h3 class="skills-detail-title">User Experience Design</h3>
+            <p class="skills-detail-copy">Designs complete user journeys that connect business priorities with customer outcomes.</p>
+          </aside>
         </div>
       </section>
 
@@ -129,13 +147,13 @@
         </div>
         <div class="roles-panel">
           <div class="badge-grid">
-            <span class="role-badge">Experience Designer</span>
-            <span class="role-badge">Visual Designer</span>
-            <span class="role-badge">Engagement Lead</span>
-            <span class="role-badge">Experience Strategist</span>
-            <span class="role-badge">Service Designer</span>
-            <span class="role-badge">Sales Solution Lead</span>
-            <span class="role-badge">Engagement Strategist</span>
+            <span class="role-badge" tabindex="0">Experience Designer<span class="role-hint">Leads end-to-end product journeys from discovery through high-fidelity validation.</span></span>
+            <span class="role-badge" tabindex="0">Visual Designer<span class="role-hint">Translates strategy into crisp interfaces, typography, color systems, and interaction rhythm.</span></span>
+            <span class="role-badge" tabindex="0">Engagement Lead<span class="role-hint">Aligns teams, manages momentum, and ensures design decisions stay connected to outcomes.</span></span>
+            <span class="role-badge" tabindex="0">Experience Strategist<span class="role-hint">Defines opportunity spaces, prioritizes journeys, and builds a roadmap grounded in evidence.</span></span>
+            <span class="role-badge" tabindex="0">Service Designer<span class="role-hint">Orchestrates frontstage and backstage touchpoints to improve full-service continuity.</span></span>
+            <span class="role-badge" tabindex="0">Sales Solution Lead<span class="role-hint">Strengthens pursuit narratives with design-led storytelling and practical solution vision.</span></span>
+            <span class="role-badge" tabindex="0">Engagement Strategist<span class="role-hint">Connects stakeholder goals, delivery plans, and design execution into one strategic thread.</span></span>
           </div>
         </div>
       </section>
@@ -145,27 +163,48 @@
           <h2 id="testimonials-heading">Selected Testimonials</h2>
           <p>Feedback from client and Slalom collaborators on Jillian's leadership, clarity, and design quality.</p>
         </div>
-        <div class="quote-grid">
-          <article class="quote-card">
+        <div class="quote-grid quote-grid-featured">
+          <article class="quote-card quote-card-with-photo">
+            <div class="quote-person">
+              <img src="assets/testimonials/gessica-tortolano.jpg" alt="Portrait of Gessica Tortolano" />
+              <div>
+                <h3>Gessica Tortolano</h3>
+                <p>Director, Client Delivery</p>
+              </div>
+            </div>
             <p>
-              "Jillian has demonstrated leadership in balancing user experience with the business case for app
-              features, helping the team practice healthy conflict and resolution."
+              "Jillian made such a strong impact at Royal Caribbean, not only delivering but mentoring and leveling
+              up the internal design team while strengthening client trust."
             </p>
-            <span class="quote-source">Gather | Product Leadership</span>
+            <span class="quote-source">Slalom Account Team</span>
           </article>
-          <article class="quote-card">
+          <article class="quote-card quote-card-with-photo">
+            <div class="quote-person">
+              <img src="assets/testimonials/renato-galindo.jpg" alt="Portrait of Renato Galindo" />
+              <div>
+                <h3>Renato Galindo</h3>
+                <p>Design Manager, RCG</p>
+              </div>
+            </div>
             <p>
-              "Her visual polish, strategic thinking, and ability to translate broad goals into tangible design
-              direction elevated the quality of output."
+              "She brings an exceptional balance of visual polish, strategic thinking, and clarity to complex
+              experiences while elevating output quality and team cadence."
             </p>
-            <span class="quote-source">Royal Caribbean Group | Design Manager</span>
+            <span class="quote-source">Client Feedback</span>
           </article>
-          <article class="quote-card">
+          <article class="quote-card quote-card-with-photo">
+            <div class="quote-person">
+              <img src="assets/testimonials/joshua-green.jpg" alt="Portrait of Joshua Green" />
+              <div>
+                <h3>Joshua Green</h3>
+                <p>Senior Director, Market Solutions</p>
+              </div>
+            </div>
             <p>
-              "Jillian transformed a simple show-and-tell request into a learning space that prompted reflection,
-              discussion, and practical action."
+              "Jillian transformed a show-and-tell ask into a space for reflection, practical instruction, and
+              leadership that energized the wider CX team."
             </p>
-            <span class="quote-source">Slalom | Senior Director, CX</span>
+            <span class="quote-source">Slalom Leadership</span>
           </article>
         </div>
         <div class="hero-actions">

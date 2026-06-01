@@ -211,6 +211,34 @@ h2 {
   align-items: stretch;
 }
 
+.hero-visual {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-portrait-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow);
+}
+
+.hero-portrait-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.hero-portrait-card figcaption {
+  margin: 0;
+  padding: 0.8rem 0.95rem;
+  color: #d9e2f3;
+  font-size: 0.92rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(5, 9, 16, 0.8);
+}
+
 .hero-copy {
   padding: 2rem 0 0.6rem;
 }
@@ -368,7 +396,34 @@ h2 {
   max-width: 64ch;
 }
 
-.parallax-stage {
+.skills-toolbar {
+  margin-top: 1.35rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.skill-filter {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #d6deed;
+  font: inherit;
+  font-size: 0.87rem;
+  padding: 0.42rem 0.78rem;
+  cursor: pointer;
+  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.skill-filter.is-active,
+.skill-filter:hover,
+.skill-filter:focus-visible {
+  background: rgba(0, 205, 181, 0.16);
+  border-color: rgba(0, 205, 181, 0.65);
+  color: #f2fdff;
+}
+
+.skills-lab {
   position: relative;
   min-height: 520px;
   margin-top: 1.45rem;
@@ -379,42 +434,74 @@ h2 {
     radial-gradient(circle at 84% 78%, rgba(255, 118, 84, 0.22), transparent 30%),
     rgba(9, 15, 28, 0.77);
   overflow: hidden;
+  perspective: 1200px;
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+  --skills-radial-size: 420px;
+  --skills-radial-alpha: 0.24;
+  --skills-glow-size: 190px;
+  --skills-glow-alpha: 0.28;
+  --skills-trail-size: 260px;
+  --skills-trail-alpha: 0.14;
 }
 
-.parallax-stage::before {
+.skills-lab::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.28));
 }
 
-.parallax-figure {
+.skills-lab::after {
+  content: '';
   position: absolute;
-  inset: auto 50% 1.2rem auto;
-  transform: translateX(50%);
-  width: min(290px, 45vw);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    var(--skills-radial-size) circle at var(--cursor-x) var(--cursor-y),
+    rgba(0, 205, 181, var(--skills-radial-alpha)),
+    transparent 72%
+  );
+  transition: opacity 280ms ease;
+}
+
+.skills-lab.is-pointer-active::after {
+  opacity: 1;
+}
+
+.skills-cursor-glow,
+.skills-cursor-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  border-radius: 50%;
   z-index: 2;
+  opacity: 0;
+  transition: opacity 220ms ease;
 }
 
-.parallax-figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.skills-cursor-glow {
+  width: var(--skills-glow-size);
+  height: var(--skills-glow-size);
+  background: radial-gradient(circle, rgba(120, 191, 255, var(--skills-glow-alpha)), rgba(120, 191, 255, 0));
+  filter: blur(2px);
 }
 
-.parallax-figure figcaption {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 0.55rem 0.72rem;
-  background: rgba(4, 8, 16, 0.7);
-  font-size: 0.83rem;
+.skills-cursor-trail {
+  width: var(--skills-trail-size);
+  height: var(--skills-trail-size);
+  background: radial-gradient(circle, rgba(255, 118, 84, var(--skills-trail-alpha)), rgba(255, 118, 84, 0));
+  filter: blur(8px);
 }
 
-.skill-chip {
+.skills-lab.is-pointer-active .skills-cursor-glow,
+.skills-lab.is-pointer-active .skills-cursor-trail {
+  opacity: 1;
+}
+
+.skill-node {
   position: absolute;
   left: var(--x);
   top: var(--y);
@@ -428,12 +515,32 @@ h2 {
   background: rgba(7, 13, 25, 0.73);
   color: #f4f7ff;
   backdrop-filter: blur(6px);
+  font: inherit;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
+  cursor: pointer;
+  opacity: 0;
+  transform: translate3d(0, 14px, 0) scale(0.96);
+  animation: nodeFloat 6.3s ease-in-out infinite;
+  animation-delay: var(--delay);
+  animation-play-state: paused;
+  transition:
+    transform 260ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    opacity 360ms ease,
+    filter 220ms ease;
 }
 
-.skill-chip::before {
+.skills-lab.is-ready .skill-node {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition-delay: var(--delay);
+  animation-play-state: running;
+}
+
+.skill-node::before {
   content: '';
   width: 0.5rem;
   height: 0.5rem;
@@ -441,9 +548,70 @@ h2 {
   background: linear-gradient(140deg, var(--accent), var(--accent-2));
 }
 
-.skill-chip.large {
-  font-size: 1rem;
-  padding: 0.68rem 0.96rem;
+.skill-node:hover,
+.skill-node:focus-visible,
+.skill-node.is-active {
+  transform: translate3d(0, -4px, 0) scale(1.02);
+  border-color: rgba(0, 205, 181, 0.85);
+  background: rgba(0, 205, 181, 0.16);
+  filter: saturate(1.15);
+}
+
+.skill-node.is-featured {
+  font-size: 0.98rem;
+  padding-inline: 0.95rem;
+}
+
+.skill-node.is-hidden {
+  opacity: 0.26;
+  pointer-events: none;
+}
+
+.skills-lab.is-ready .skill-node.is-hidden {
+  opacity: 0.22;
+}
+
+.skills-detail {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: min(330px, calc(100% - 2rem));
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: rgba(4, 8, 16, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 0.9rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+}
+
+.skills-detail-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--accent-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.skills-detail-title {
+  margin-top: 0.35rem;
+  font-size: 1.15rem;
+}
+
+.skills-detail-copy {
+  margin: 0.55rem 0 0;
+  color: #d9e2f3;
+}
+
+@keyframes nodeFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .roles-panel,
@@ -499,6 +667,47 @@ h2 {
   opacity: 1;
 }
 
+.role-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.62rem);
+  transform: translateX(-50%) translateY(6px);
+  width: min(240px, 78vw);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  background: rgba(3, 8, 18, 0.95);
+  color: #e3ecff;
+  padding: 0.58rem 0.68rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.role-hint::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 10px;
+  height: 10px;
+  background: rgba(3, 8, 18, 0.95);
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.role-badge:hover .role-hint,
+.role-badge:focus-visible .role-hint {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .quote-grid,
 .story-grid {
   display: grid;
@@ -537,6 +746,41 @@ h2 {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.quote-grid-featured {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.quote-card-with-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quote-person {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.quote-person img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.quote-person h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.quote-person p {
+  margin: 0.12rem 0 0;
+  font-size: 0.84rem;
+  color: #c7d3ea;
 }
 
 .story-card h3,
@@ -624,6 +868,40 @@ h2 {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.03);
   padding: 1.2rem;
+}
+
+.contact-slalom-lockup {
+  margin-top: 1.25rem;
+  max-width: 520px;
+}
+
+.contact-form-classic {
+  margin-top: 1.8rem;
+  border-radius: 18px;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(9, 14, 26, 0.8));
+}
+
+.mail-shell-head {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.mail-shell-head span {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.mail-shell-head p {
+  margin: 0 0 0 0.3rem;
+  color: #c7d3eb;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .form-row {
@@ -735,6 +1013,15 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .skills-lab {
+    --skills-radial-size: 340px;
+    --skills-radial-alpha: 0.19;
+    --skills-glow-size: 160px;
+    --skills-glow-alpha: 0.2;
+    --skills-trail-size: 210px;
+    --skills-trail-alpha: 0.1;
+  }
+
   .quote-grid,
   .story-grid,
   .timeline,
@@ -743,12 +1030,8 @@ a:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .parallax-stage {
+  .skills-lab {
     min-height: 620px;
-  }
-
-  .parallax-figure {
-    width: min(260px, 54vw);
   }
 }
 
@@ -800,15 +1083,45 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .skill-chip {
+  .skill-node {
     font-size: 0.82rem;
-    max-width: 86%;
+    max-width: 90%;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .parallax-stage {
+  .skills-toolbar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.3rem;
+  }
+
+  .skills-lab {
+    --skills-radial-size: 260px;
+    --skills-radial-alpha: 0.13;
+    --skills-glow-size: 120px;
+    --skills-glow-alpha: 0.13;
+    --skills-trail-size: 150px;
+    --skills-trail-alpha: 0.05;
     min-height: 700px;
+  }
+
+  .skills-detail {
+    width: calc(100% - 1.2rem);
+    left: 0.6rem;
+    right: 0.6rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .skills-lab {
+    --skills-radial-alpha: 0.1;
+    --skills-glow-alpha: 0.1;
+    --skills-trail-alpha: 0;
+  }
+
+  .skills-cursor-trail {
+    display: none;
   }
 }
 
@@ -828,5 +1141,18 @@ a:focus-visible {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .skill-node {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .skills-lab::after,
+  .skills-cursor-glow,
+  .skills-cursor-trail {
+    display: none;
   }
 }

@@ -2,7 +2,7 @@
   var defaults = {
     fullName: 'Jillian Halley',
     professionalTitle: 'Senior Experience Consultant within Product Design at Slalom',
-    contactEmail: 'hello@yourdomain.com',
+    contactEmail: 'jillian.merrill@slalom.com',
     location: 'Boston, MA',
     availability: 'Accepting select 2026 engagements',
     resumeUrl: '#',
@@ -50,6 +50,11 @@
     node.setAttribute('href', 'mailto:' + content.contactEmail);
     node.textContent = content.contactEmail;
   });
+
+  var toField = document.querySelector('#to');
+  if (toField) {
+    toField.value = content.contactEmail;
+  }
 
   var menuButton = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.site-nav');
@@ -189,14 +194,188 @@
     }
   }
 
+  var skillsLab = document.querySelector('#skills-lab');
+  var skillFilters = document.querySelectorAll('.skill-filter');
+  var skillNodes = skillsLab ? skillsLab.querySelectorAll('.skill-node') : [];
+  var skillTitle = document.querySelector('.skills-detail-title');
+  var skillCopy = document.querySelector('.skills-detail-copy');
+
+  function setActiveSkill(node) {
+    if (!node || !skillTitle || !skillCopy) {
+      return;
+    }
+
+    skillNodes.forEach(function (item) {
+      item.classList.remove('is-active');
+    });
+    node.classList.add('is-active');
+    skillTitle.textContent = node.dataset.skillLabel || node.textContent;
+    skillCopy.textContent = node.dataset.skillDetail || '';
+  }
+
+  if (skillsLab && skillNodes.length) {
+    window.requestAnimationFrame(function () {
+      skillsLab.classList.add('is-ready');
+    });
+
+    setActiveSkill(skillNodes[0]);
+
+    skillNodes.forEach(function (node) {
+      node.addEventListener('mouseenter', function () {
+        setActiveSkill(node);
+      });
+      node.addEventListener('focus', function () {
+        setActiveSkill(node);
+      });
+      node.addEventListener('click', function () {
+        setActiveSkill(node);
+      });
+    });
+
+    if (!reducedMotion) {
+      var labRect = null;
+      var glowNode = document.createElement('span');
+      var trailNode = document.createElement('span');
+      var targetX = 0;
+      var targetY = 0;
+      var trailX = 0;
+      var trailY = 0;
+      var trailFrame = null;
+      var glowHalf = 95;
+      var trailHalf = 130;
+
+      glowNode.className = 'skills-cursor-glow';
+      trailNode.className = 'skills-cursor-trail';
+      skillsLab.appendChild(trailNode);
+      skillsLab.appendChild(glowNode);
+
+      var updateLabRect = function () {
+        labRect = skillsLab.getBoundingClientRect();
+        glowHalf = glowNode.offsetWidth / 2;
+        trailHalf = trailNode.offsetWidth / 2;
+      };
+
+      var paintTrail = function () {
+        trailX += (targetX - trailX) * 0.2;
+        trailY += (targetY - trailY) * 0.2;
+
+        trailNode.style.transform =
+          'translate3d(' +
+          (trailX - trailHalf).toFixed(2) +
+          'px, ' +
+          (trailY - trailHalf).toFixed(2) +
+          'px, 0)';
+
+        trailFrame = window.requestAnimationFrame(paintTrail);
+      };
+
+      var ensureTrail = function () {
+        if (!trailFrame) {
+          trailFrame = window.requestAnimationFrame(paintTrail);
+        }
+      };
+
+      updateLabRect();
+      window.addEventListener('resize', updateLabRect);
+
+      skillsLab.addEventListener('mouseenter', function () {
+        skillsLab.classList.add('is-pointer-active');
+      });
+
+      skillsLab.addEventListener('mousemove', function (event) {
+        if (!labRect) {
+          updateLabRect();
+        }
+
+        var centerX = labRect.left + labRect.width / 2;
+        var centerY = labRect.top + labRect.height / 2;
+        var offsetX = (event.clientX - centerX) / labRect.width;
+        var offsetY = (event.clientY - centerY) / labRect.height;
+        var localX = event.clientX - labRect.left;
+        var localY = event.clientY - labRect.top;
+
+        targetX = localX;
+        targetY = localY;
+        if (!trailX && !trailY) {
+          trailX = localX;
+          trailY = localY;
+        }
+
+        skillsLab.style.setProperty('--cursor-x', localX.toFixed(2) + 'px');
+        skillsLab.style.setProperty('--cursor-y', localY.toFixed(2) + 'px');
+        glowNode.style.transform =
+          'translate3d(' +
+          (localX - glowHalf).toFixed(2) +
+          'px, ' +
+          (localY - glowHalf).toFixed(2) +
+          'px, 0)';
+        ensureTrail();
+
+        skillNodes.forEach(function (node) {
+          var depth = Number(node.dataset.depth || '0.2');
+          node.style.transform =
+            'translate3d(' +
+            (offsetX * depth * 26).toFixed(2) +
+            'px, ' +
+            (offsetY * depth * 22).toFixed(2) +
+            'px, 0)';
+        });
+      });
+
+      skillsLab.addEventListener('mouseleave', function () {
+        skillsLab.classList.remove('is-pointer-active');
+
+        skillNodes.forEach(function (node) {
+          node.style.transform = 'translate3d(0, 0, 0)';
+        });
+
+        if (trailFrame) {
+          window.cancelAnimationFrame(trailFrame);
+          trailFrame = null;
+        }
+      });
+    }
+  }
+
+  if (skillFilters.length && skillNodes.length) {
+    skillFilters.forEach(function (filter) {
+      filter.addEventListener('click', function () {
+        var active = filter.dataset.filter || 'all';
+
+        skillFilters.forEach(function (node) {
+          node.classList.remove('is-active');
+        });
+        filter.classList.add('is-active');
+
+        var firstVisible = null;
+        skillNodes.forEach(function (node) {
+          var group = node.dataset.skillGroup;
+          var visible = active === 'all' || group === active;
+          node.classList.toggle('is-hidden', !visible);
+          if (visible && !firstVisible) {
+            firstVisible = node;
+          }
+        });
+
+        setActiveSkill(firstVisible);
+      });
+    });
+  }
+
   var contactForm = document.querySelector('.contact-form');
   var statusNode = document.querySelector('.form-status');
 
   if (contactForm && statusNode) {
     if (content.contactFormEndpoint) {
       contactForm.setAttribute('action', content.contactFormEndpoint);
-      contactForm.setAttribute('method', 'post');
-      statusNode.textContent = '';
+      if (content.contactFormEndpoint.indexOf('mailto:') === 0) {
+        contactForm.setAttribute('method', 'post');
+        contactForm.setAttribute('enctype', 'text/plain');
+        statusNode.textContent = 'Submitting opens an email draft in the default mail client.';
+      } else {
+        contactForm.setAttribute('method', 'post');
+        statusNode.textContent = '';
+      }
     } else {
       contactForm.addEventListener('submit', function (event) {
         event.preventDefault();
