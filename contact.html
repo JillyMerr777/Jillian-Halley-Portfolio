@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Jillian Halley</title>
+    <meta
+      name="description"
+      content="Contact page for Jillian Halley, Senior Experience Consultant within Product Design at Slalom."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="Jillian Halley home">
+          <span class="brand-mark">JH</span>
+          Jillian Halley
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+        <nav class="site-nav" id="primary-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="client-stories.html">Client Stories</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="container">
+      <section class="page-hero reveal">
+        <p class="eyebrow">Contact</p>
+        <h1>Connect with Jillian Halley</h1>
+        <p class="lead">
+          Jillian partners with teams that need thoughtful experience strategy, polished product design execution,
+          and trusted collaboration.
+        </p>
+      </section>
+
+      <section class="contact-grid reveal" aria-label="Contact details">
+        <article class="contact-card">
+          <h3>General Inquiries</h3>
+          <p>
+            For new opportunities, collaboration inquiries, and project discussions, use the form below to share
+            project context and goals.
+          </p>
+        </article>
+        <article class="contact-card">
+          <h3>Direct Contact</h3>
+          <p>Email: <a data-site-link="contact-email" href="#">hello@yourdomain.com</a></p>
+          <p>Location: <span data-site-text="location">Boston, MA</span></p>
+          <p>Availability: <span data-site-text="availability">Accepting select 2026 engagements</span></p>
+        </article>
+        <article class="contact-card">
+          <h3>Scheduling</h3>
+          <p>
+            Add a meeting link later using the centralized entry file.
+            <a data-site-link="calendly-url" href="#" target="_blank" rel="noopener">Book Intro Call</a>
+          </p>
+        </article>
+        <article class="contact-card">
+          <h3>Practice Focus</h3>
+          <p>
+            Experience strategy, service design, UX/UI design, design systems, pursuit storytelling, and
+            cross-functional product team facilitation.
+          </p>
+        </article>
+        <article class="contact-card">
+          <h3>Engagement Scope</h3>
+          <p>
+            Product initiatives, transformation programs, proposal support, and design leadership engagements across
+            industries.
+          </p>
+        </article>
+      </section>
+
+      <form class="contact-form reveal" aria-label="Contact form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" />
+        </div>
+
+        <div class="form-field">
+          <label for="message">Project Overview</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Share project goals, timeline, and desired outcomes."
+            required
+          ></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Send Message</button>
+        <p class="form-note">
+          Entry point: update contactFormEndpoint in site-content.js when ready to connect Formspree or CRM.
+        </p>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>&copy; <span class="js-year"></span> Jillian Halley Portfolio</p>
+        <ul class="footer-links" aria-label="Footer links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="client-stories.html">Client Stories</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a data-site-link="linkedin-url" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a data-site-link="behance-url" href="#" target="_blank" rel="noopener">Behance</a></li>
+          <li><a data-site-link="dribbble-url" href="#" target="_blank" rel="noopener">Dribbble</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="site-content.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
