@@ -751,6 +751,7 @@ h2 {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(5, 10, 19, 0.68));
   padding: 0.82rem;
   position: relative;
+  z-index: 1;
   text-align: left;
   color: #eff4ff;
   min-height: 126px;
@@ -842,6 +843,12 @@ h2 {
 .capability-card.show-hint .capability-inline-hint {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+.capability-card.show-hint,
+.capability-card:hover,
+.capability-card:focus-visible {
+  z-index: 40;
 }
 
 .capability-detail {
