@@ -1,0 +1,5 @@
+# Exclude local-only source materials from Vercel uploads
+Clients_Testimonials.pptx
+Site styling insperation/
+.DS_Store
+*.pptx
