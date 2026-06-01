@@ -206,17 +206,19 @@ h2 {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 1.6rem;
-  align-items: stretch;
+  grid-template-columns: 1.04fr 0.96fr;
+  gap: 1.7rem;
+  align-items: center;
 }
 
 .hero-visual {
   display: grid;
   gap: 1rem;
+  order: -1;
 }
 
 .hero-portrait-card {
+  position: relative;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -226,8 +228,9 @@ h2 {
 
 .hero-portrait-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 6;
   object-fit: cover;
+  object-position: center 32%;
 }
 
 .hero-portrait-card figcaption {
@@ -239,8 +242,27 @@ h2 {
   background: rgba(5, 9, 16, 0.8);
 }
 
+.hero-floating-pill {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #f2f8ff;
+  background: rgba(7, 13, 25, 0.76);
+  backdrop-filter: blur(7px);
+}
+
 .hero-copy {
-  padding: 2rem 0 0.6rem;
+  padding: 0.6rem 0 0.6rem;
 }
 
 .lead {
@@ -631,6 +653,55 @@ h2 {
   padding: 1.18rem;
 }
 
+.capability-view-switch {
+  margin-top: 0.95rem;
+  display: inline-flex;
+  gap: 0.45rem;
+  padding: 0.28rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(4, 8, 16, 0.65);
+}
+
+.capability-view-btn {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: #d8e2f6;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.38rem 0.72rem;
+  cursor: pointer;
+}
+
+.capability-view-btn.is-active,
+.capability-view-btn:hover,
+.capability-view-btn:focus-visible {
+  border-color: rgba(0, 205, 181, 0.58);
+  background: rgba(0, 205, 181, 0.16);
+  color: #f4fcff;
+}
+
+.capability-view-reset {
+  margin-top: 0.48rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #9cb2d8;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+  cursor: pointer;
+}
+
+.capability-view-reset:hover,
+.capability-view-reset:focus-visible {
+  color: #d8e7ff;
+}
+
 .badge-grid {
   display: flex;
   gap: 0.65rem;
@@ -665,6 +736,97 @@ h2 {
 .role-badge:hover::after,
 .role-badge:focus-visible::after {
   opacity: 1;
+}
+
+.capability-grid {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.capability-card {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(5, 10, 19, 0.68));
+  padding: 0.82rem;
+  text-align: left;
+  color: #eff4ff;
+  min-height: 126px;
+  cursor: pointer;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.roles-panel[data-view='classic'] .capability-grid {
+  grid-template-columns: unset;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.roles-panel[data-view='classic'] .capability-card {
+  min-height: auto;
+  border-radius: 999px;
+  padding: 0.44rem 0.82rem;
+  background: rgba(7, 13, 25, 0.8);
+}
+
+.roles-panel[data-view='classic'] .capability-hover {
+  display: none;
+}
+
+.roles-panel[data-view='classic'] .capability-detail {
+  display: none;
+}
+
+.capability-card:hover,
+.capability-card:focus-visible,
+.capability-card.is-active {
+  transform: translateY(-3px);
+  border-color: rgba(0, 205, 181, 0.75);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+}
+
+.capability-title {
+  display: block;
+  font-family: 'Space Grotesk', 'Avenir Next', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.capability-hover {
+  display: block;
+  margin-top: 0.68rem;
+  color: #c7d3ea;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.capability-detail {
+  margin-top: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  background: rgba(4, 8, 16, 0.88);
+  padding: 0.85rem 0.95rem;
+}
+
+.capability-detail-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--accent-3);
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 700;
+}
+
+.capability-detail-title {
+  margin-top: 0.32rem;
+  font-size: 1.18rem;
+}
+
+.capability-detail-copy {
+  margin: 0.46rem 0 0;
+  color: #dae4f3;
 }
 
 .role-hint {
@@ -756,6 +918,7 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-height: 280px;
 }
 
 .quote-person {
@@ -765,9 +928,9 @@ h2 {
 }
 
 .quote-person img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  width: 92px;
+  height: 92px;
+  border-radius: 14px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.24);
 }
@@ -1013,6 +1176,10 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .capability-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .skills-lab {
     --skills-radial-size: 340px;
     --skills-radial-alpha: 0.19;
@@ -1081,6 +1248,19 @@ a:focus-visible {
   .stat-grid,
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .capability-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roles-panel[data-view='classic'] .capability-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .roles-panel[data-view='classic'] .capability-card {
+    border-radius: 14px;
   }
 
   .skill-node {

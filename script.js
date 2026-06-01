@@ -11,6 +11,7 @@
     behanceUrl: '#',
     dribbbleUrl: '#',
     calendlyUrl: '#',
+    capabilityViewMode: 'inspiration',
     contactFormEndpoint: ''
   };
 
@@ -359,6 +360,97 @@
 
         setActiveSkill(firstVisible);
       });
+    });
+  }
+
+  var capabilityCards = document.querySelectorAll('.capability-card[data-capability-title]');
+  var capabilityTitle = document.querySelector('.capability-detail-title');
+  var capabilityCopy = document.querySelector('.capability-detail-copy');
+  var rolesPanel = document.querySelector('#roles-panel');
+  var capabilityViewButtons = document.querySelectorAll('.capability-view-btn[data-capability-view]');
+  var capabilityResetButton = document.querySelector('[data-capability-reset]');
+  var defaultCapabilityView = content.capabilityViewMode === 'classic' ? 'classic' : 'inspiration';
+
+  function setCapabilityView(mode, persist) {
+    if (!rolesPanel) {
+      return;
+    }
+
+    var view = mode === 'classic' ? 'classic' : 'inspiration';
+    rolesPanel.setAttribute('data-view', view);
+
+    capabilityViewButtons.forEach(function (button) {
+      var active = button.dataset.capabilityView === view;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    if (persist) {
+      try {
+        window.localStorage.setItem('capabilityViewMode', view);
+      } catch (error) {
+        // no-op
+      }
+    }
+  }
+
+  function setCapability(card) {
+    if (!card || !capabilityTitle || !capabilityCopy) {
+      return;
+    }
+
+    capabilityCards.forEach(function (node) {
+      node.classList.remove('is-active');
+    });
+
+    card.classList.add('is-active');
+    capabilityTitle.textContent = card.dataset.capabilityTitle || '';
+    capabilityCopy.textContent = card.dataset.capabilityDesc || '';
+  }
+
+  if (capabilityCards.length && capabilityTitle && capabilityCopy) {
+    var initialView = defaultCapabilityView;
+    try {
+      var storedView = window.localStorage.getItem('capabilityViewMode');
+      if (storedView) {
+        initialView = storedView;
+      }
+    } catch (error) {
+      // no-op
+    }
+
+    setCapabilityView(initialView, false);
+    setCapability(capabilityCards[0]);
+
+    capabilityCards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        setCapability(card);
+      });
+      card.addEventListener('focus', function () {
+        setCapability(card);
+      });
+      card.addEventListener('click', function () {
+        setCapability(card);
+      });
+    });
+  }
+
+  if (capabilityViewButtons.length) {
+    capabilityViewButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        setCapabilityView(button.dataset.capabilityView, true);
+      });
+    });
+  }
+
+  if (capabilityResetButton) {
+    capabilityResetButton.addEventListener('click', function () {
+      try {
+        window.localStorage.removeItem('capabilityViewMode');
+      } catch (error) {
+        // no-op
+      }
+      setCapabilityView(defaultCapabilityView, false);
     });
   }
 

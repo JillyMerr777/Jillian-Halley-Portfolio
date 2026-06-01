@@ -10,5 +10,6 @@ window.siteContent = {
   behanceUrl: "#",
   dribbbleUrl: "#",
   calendlyUrl: "#",
+  capabilityViewMode: "inspiration",
   contactFormEndpoint: "mailto:jillian.merrill@slalom.com?subject=Portfolio%20Inquiry%20for%20Jillian%20Halley"
 };
