@@ -1,0 +1,1 @@
+I created this portfolio site to display information and artifacts about working with me. Eventually, I would love ot use this site as a prospective client facing asset - to be shared out when considering me for a project. I plan to continue to revise and build upon this initial vision.
