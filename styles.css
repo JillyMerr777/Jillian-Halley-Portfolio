@@ -419,15 +419,12 @@ h2 {
   color: #d5e3fd;
 }
 
-.rc-logo-swatch {
-  width: 152px;
-  height: 42px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-image: url('assets/client-logos/royal-caribbean-casino.png');
-  background-size: 960px auto;
-  background-position: -72px -48px;
-  filter: brightness(0) invert(1) contrast(1.14);
+.rc-logo-mark {
+  height: 46px;
+  width: auto;
+  max-width: min(100%, 220px);
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .slalom-lockup {
@@ -493,43 +490,39 @@ h2 {
 
 .logo-marquee {
   margin-top: 1.1rem;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   border: 1px solid rgba(16, 26, 47, 0.14);
   border-radius: 18px;
-  padding: 0.72rem 0;
+  padding: 1.05rem 1.1rem;
   background: #ffffff;
-  mask-image: linear-gradient(to right, transparent, black 7%, black 93%, transparent);
 }
 
-.logo-track {
+.logo-row {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(0.45rem, 0.9vw, 0.9rem);
+  min-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logo-item {
   display: flex;
   align-items: center;
-  gap: 2.7rem;
-  width: max-content;
-  padding: 0 1.1rem;
-  animation: logoDrift 34s linear infinite;
+  justify-content: center;
+  height: 74px;
+  padding: 0 0.3rem;
 }
 
-.logo-track + .logo-track {
-  margin-top: 0.58rem;
-  animation-delay: -17s;
-}
-
-.logo-track img {
-  height: 34px;
+.logo-item img {
+  height: var(--logo-h, 46px);
   width: auto;
+  max-width: 100%;
   opacity: 1;
   filter: none;
   mix-blend-mode: multiply;
-}
-
-@keyframes logoDrift {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
 }
 
 .stat-grid {
@@ -1404,8 +1397,13 @@ a:focus-visible {
     max-width: none;
   }
 
-  .logo-track img {
-    height: 28px;
+  .logo-row {
+    min-width: 920px;
+    gap: 0.65rem;
+  }
+
+  .logo-item {
+    height: 66px;
   }
 
   .capability-grid {
@@ -1472,12 +1470,17 @@ a:focus-visible {
     margin-top: 0.9rem;
   }
 
-  .logo-track {
-    gap: 1.6rem;
+  .logo-row {
+    min-width: 760px;
+    gap: 0.8rem;
   }
 
-  .logo-track img {
-    height: 24px;
+  .logo-item {
+    height: 60px;
+  }
+
+  .logo-item img {
+    max-width: 170px;
   }
 
   .menu-toggle {
