@@ -6,8 +6,6 @@
     location: 'Boston, MA',
     availability: 'Available for New Projects',
     nextOpening: 'October 1st, 2026 from 9am - 5pm and beyond',
-    sitePassword: 'ShowMe',
-    siteAccessStorageKey: 'jh-portfolio-access',
     resumeUrl: '#',
     resumeLabel: 'Resume coming soon',
     linkedinUrl: '#',
@@ -19,106 +17,6 @@
   };
 
   var content = Object.assign({}, defaults, window.siteContent || {});
-
-  function initSiteAccessGate() {
-    var requiredPassword = String(content.sitePassword || 'ShowMe');
-    var storageKey = String(content.siteAccessStorageKey || 'jh-portfolio-access');
-    var isUnlocked = false;
-
-    try {
-      isUnlocked = window.sessionStorage.getItem(storageKey) === 'true';
-    } catch (error) {
-      isUnlocked = false;
-    }
-
-    if (isUnlocked) {
-      return;
-    }
-
-    var eyeIcon =
-      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.8-6 10-6 10 6 10 6-3.8 6-10 6S2 12 2 12"></path><circle cx="12" cy="12" r="3"></circle></svg>';
-    var eyeOffIcon =
-      '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3l18 18"></path><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path><path d="M9.9 5.2A11.6 11.6 0 0 1 12 5c6.2 0 10 7 10 7a16.6 16.6 0 0 1-3.2 4.2"></path><path d="M6.7 6.7A17.4 17.4 0 0 0 2 12s3.8 7 10 7c1.6 0 3-.4 4.2-1"></path></svg>';
-
-    document.body.classList.add('site-locked');
-
-    var gate = document.createElement('div');
-    gate.className = 'site-access-gate';
-    gate.setAttribute('role', 'dialog');
-    gate.setAttribute('aria-modal', 'true');
-    gate.setAttribute('aria-labelledby', 'site-access-title');
-    gate.innerHTML =
-      '<div class="site-access-modal">' +
-      '  <p class="site-access-eyebrow">Password Protected Site</p>' +
-      '  <h2 id="site-access-title">Enter Password to Continue</h2>' +
-      '  <p class="site-access-copy">This site is password protected. Enter the password to access Jillian\'s portfolio.</p>' +
-      '  <form class="site-access-form" novalidate>' +
-      '    <label for="site-password-input">Password</label>' +
-      '    <div class="site-password-field">' +
-      '      <input id="site-password-input" class="site-password-input" type="password" autocomplete="current-password" required />' +
-      '      <button class="site-password-toggle" type="button" aria-label="Show password" aria-pressed="false">' +
-      '        <span class="site-password-toggle-icon" aria-hidden="true">' +
-      eyeIcon +
-      '</span>' +
-      '        <span class="site-password-toggle-text">Show</span>' +
-      '      </button>' +
-      '    </div>' +
-      '    <p class="site-access-error" aria-live="polite"></p>' +
-      '    <button class="btn btn-primary site-access-submit" type="submit">Enter</button>' +
-      '  </form>' +
-      '</div>';
-
-    document.body.appendChild(gate);
-
-    var passwordInput = gate.querySelector('#site-password-input');
-    var passwordToggle = gate.querySelector('.site-password-toggle');
-    var passwordToggleIcon = gate.querySelector('.site-password-toggle-icon');
-    var passwordToggleText = gate.querySelector('.site-password-toggle-text');
-    var form = gate.querySelector('.site-access-form');
-    var errorNode = gate.querySelector('.site-access-error');
-
-    function setPasswordVisibility(showValue) {
-      passwordInput.setAttribute('type', showValue ? 'text' : 'password');
-      passwordToggle.setAttribute('aria-pressed', showValue ? 'true' : 'false');
-      passwordToggle.setAttribute('aria-label', showValue ? 'Hide password' : 'Show password');
-      passwordToggleText.textContent = showValue ? 'Hide' : 'Show';
-      passwordToggleIcon.innerHTML = showValue ? eyeOffIcon : eyeIcon;
-    }
-
-    passwordToggle.addEventListener('click', function () {
-      var showValue = passwordInput.getAttribute('type') === 'password';
-      setPasswordVisibility(showValue);
-      passwordInput.focus();
-    });
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      errorNode.textContent = '';
-
-      if (passwordInput.value === requiredPassword) {
-        try {
-          window.sessionStorage.setItem(storageKey, 'true');
-        } catch (error) {
-          // no-op
-        }
-
-        document.body.classList.remove('site-locked');
-        gate.classList.add('is-unlocking');
-        window.setTimeout(function () {
-          gate.remove();
-        }, 220);
-      } else {
-        errorNode.textContent = 'That password is not correct. Please try again.';
-        passwordInput.select();
-      }
-    });
-
-    window.requestAnimationFrame(function () {
-      passwordInput.focus();
-    });
-  }
-
-  initSiteAccessGate();
 
   function setText(target, value) {
     document.querySelectorAll('[data-site-text="' + target + '"]').forEach(function (node) {
