@@ -5,6 +5,8 @@ window.siteContent = {
   location: "Boston, MA",
   availability: "Available for New Projects",
   nextOpening: "October 1st, 2026 from 9am - 5pm and beyond",
+  sitePassword: "ShowMe",
+  siteAccessStorageKey: "jh-portfolio-access",
   resumeUrl: "#",
   resumeLabel: "Resume coming soon",
   linkedinUrl: "#",
