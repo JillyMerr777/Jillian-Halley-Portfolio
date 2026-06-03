@@ -251,8 +251,12 @@ h2 {
   right: -120px;
   bottom: -130px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 118, 84, 0.4), rgba(255, 118, 84, 0));
-  filter: blur(10px);
+  background: radial-gradient(
+    circle at 45% 45%,
+    rgba(255, 118, 84, 0.42) 0%,
+    rgba(255, 118, 84, 0.24) 36%,
+    rgba(255, 118, 84, 0) 74%
+  );
 }
 
 .hero-silhouette {
@@ -357,8 +361,12 @@ h2 {
   width: 350px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 205, 181, 0.4), rgba(0, 205, 181, 0));
-  filter: blur(8px);
+  background: radial-gradient(
+    circle at 38% 38%,
+    rgba(0, 205, 181, 0.4) 0%,
+    rgba(0, 205, 181, 0.2) 40%,
+    rgba(0, 205, 181, 0) 76%
+  );
 }
 
 .panel-content {
