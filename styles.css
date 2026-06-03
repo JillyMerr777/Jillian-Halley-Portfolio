@@ -1293,6 +1293,78 @@ h2 {
   max-width: 520px;
 }
 
+.availability-section {
+  margin-top: 1.8rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+}
+
+.availability-copy,
+.availability-widget-shell {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.availability-copy h2 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.3rem, 2.3vw, 1.8rem);
+}
+
+.availability-copy p {
+  margin: 0.75rem 0 0;
+  color: #dae2f1;
+}
+
+.availability-next-opening {
+  font-size: 1rem;
+}
+
+.availability-pill {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(0, 205, 181, 0.5);
+  border-radius: 999px;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a9ffe8;
+  background: rgba(0, 205, 181, 0.12);
+}
+
+.availability-pill::before {
+  content: '';
+  width: 0.46rem;
+  height: 0.46rem;
+  border-radius: 50%;
+  background: #39ff8f;
+  box-shadow: 0 0 0 5px rgba(57, 255, 143, 0.16);
+}
+
+.calendly-inline-host {
+  margin-top: 0.85rem;
+  min-width: 320px;
+  min-height: 700px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.calendly-fallback {
+  margin-top: 0.85rem;
+  border: 1px dashed rgba(255, 255, 255, 0.24);
+  border-radius: 14px;
+  padding: 0.9rem;
+  color: #d7e4fb;
+  background: rgba(4, 8, 16, 0.55);
+}
+
 .contact-form-classic {
   margin-top: 1.8rem;
   border-radius: 18px;
@@ -1489,7 +1561,8 @@ a:focus-visible {
   .story-grid,
   .timeline,
   .contact-grid,
-  .stat-grid {
+  .stat-grid,
+  .availability-section {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1600,8 +1673,14 @@ a:focus-visible {
   .timeline,
   .contact-grid,
   .stat-grid,
-  .form-row {
+  .form-row,
+  .availability-section {
     grid-template-columns: 1fr;
+  }
+
+  .calendly-inline-host {
+    min-width: 100%;
+    min-height: 660px;
   }
 
   .capability-grid {

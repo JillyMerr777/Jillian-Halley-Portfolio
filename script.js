@@ -4,7 +4,8 @@
     professionalTitle: 'Senior Experience Consultant within Product Design at Slalom',
     contactEmail: 'jillian.merrill@slalom.com',
     location: 'Boston, MA',
-    availability: 'Accepting select 2026 engagements',
+    availability: 'Available for New Projects',
+    nextOpening: 'October 1st, 2026 from 9am - 5pm and beyond',
     resumeUrl: '#',
     resumeLabel: 'Resume coming soon',
     linkedinUrl: '#',
@@ -38,6 +39,7 @@
   setText('contact-email', content.contactEmail);
   setText('location', content.location);
   setText('availability', content.availability);
+  setText('next-opening', content.nextOpening);
   setText('resume-label', content.resumeLabel);
 
   setLink('resume-url', content.resumeUrl);
@@ -572,6 +574,78 @@
         event.preventDefault();
         statusNode.textContent = 'Message ready to send. Add a form endpoint in site-content.js to enable delivery.';
         contactForm.reset();
+      });
+    }
+  }
+
+  var calendlyInlineHost = document.querySelector('[data-calendly-inline]');
+  var calendlyFallback = document.querySelector('[data-calendly-fallback]');
+
+  function buildCalendlyEmbedUrl(url) {
+    try {
+      var parsed = new URL(url);
+      if (!parsed.searchParams.get('hide_event_type_details')) {
+        parsed.searchParams.set('hide_event_type_details', '1');
+      }
+      if (!parsed.searchParams.get('hide_gdpr_banner')) {
+        parsed.searchParams.set('hide_gdpr_banner', '1');
+      }
+      return parsed.toString();
+    } catch (error) {
+      return url;
+    }
+  }
+
+  function loadCalendlyScript(onReady) {
+    var existingScript = document.querySelector('script[data-calendly-widget-script]');
+    if (existingScript) {
+      if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
+        onReady();
+      } else {
+        existingScript.addEventListener('load', onReady, { once: true });
+      }
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.setAttribute('data-calendly-widget-script', 'true');
+    script.addEventListener('load', onReady, { once: true });
+    document.body.appendChild(script);
+  }
+
+  if (calendlyInlineHost) {
+    var hasCalendlyUrl = Boolean(content.calendlyUrl && content.calendlyUrl !== '#');
+
+    if (!hasCalendlyUrl) {
+      calendlyInlineHost.hidden = true;
+      if (calendlyFallback) {
+        calendlyFallback.hidden = false;
+      }
+    } else {
+      var embedUrl = buildCalendlyEmbedUrl(content.calendlyUrl);
+
+      if (calendlyFallback) {
+        calendlyFallback.hidden = true;
+      }
+
+      loadCalendlyScript(function () {
+        if (!(window.Calendly && typeof window.Calendly.initInlineWidget === 'function')) {
+          calendlyInlineHost.hidden = true;
+          if (calendlyFallback) {
+            calendlyFallback.hidden = false;
+          }
+          return;
+        }
+
+        calendlyInlineHost.hidden = false;
+        calendlyInlineHost.innerHTML = '';
+
+        window.Calendly.initInlineWidget({
+          url: embedUrl,
+          parentElement: calendlyInlineHost
+        });
       });
     }
   }

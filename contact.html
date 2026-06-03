@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | Jillian Halley</title>
+    <title>Contact & Availability | Jillian Halley</title>
     <meta
       name="description"
-      content="Contact page for Jillian Halley, Senior Experience Consultant within Product Design at Slalom."
+      content="Contact and availability page for Jillian Halley, Senior Experience Consultant within Product Design at Slalom."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -33,8 +33,8 @@
 
     <main id="main-content" class="container">
       <section class="page-hero reveal">
-        <p class="eyebrow">Contact</p>
-        <h1>Connect with Jillian Halley</h1>
+        <p class="eyebrow">Contact & Availability</p>
+        <h1>Contact Jillian and View Live Availability</h1>
         <p class="lead">
           Jillian partners with teams that need thoughtful experience strategy, polished product design execution,
           and trusted collaboration.
@@ -57,14 +57,43 @@
           <h3>Email Contact</h3>
           <p>Primary inbox: <a data-site-link="contact-email" href="#">jillian.merrill@slalom.com</a></p>
           <p>Location: <span data-site-text="location">Boston, MA</span></p>
-          <p>Availability: <span data-site-text="availability">Accepting select 2026 engagements</span></p>
+          <p>Availability: <span data-site-text="availability">Available for New Projects</span></p>
         </article>
         <article class="contact-card">
-          <h3>Scheduling</h3>
+          <h3>Availability Snapshot</h3>
+          <p><strong>Next opening:</strong> <span data-site-text="next-opening">October 1st, 2026 from 9am - 5pm and beyond</span></p>
           <p>
-            Add a meeting link later using the centralized entry file.
+            Browse live booking slots below.
             <a data-site-link="calendly-url" href="#" target="_blank" rel="noopener">Book Intro Call</a>
           </p>
+        </article>
+      </section>
+
+      <section class="availability-section reveal" aria-labelledby="availability-heading">
+        <article class="availability-copy">
+          <p class="eyebrow">Calendly Availability</p>
+          <h2 id="availability-heading">Available for New Projects</h2>
+          <p class="availability-next-opening">
+            <strong>Next opening:</strong>
+            <span data-site-text="next-opening">October 1st, 2026 from 9am - 5pm and beyond</span>
+          </p>
+          <p>
+            View real-time booking slots directly in the calendar below. If a time is not listed, that window is
+            fully booked.
+          </p>
+          <a class="btn btn-secondary" data-site-link="calendly-url" href="#" target="_blank" rel="noopener"
+            >Open Calendly in a New Tab</a
+          >
+        </article>
+
+        <article class="availability-widget-shell" aria-label="Live scheduling widget">
+          <p class="availability-pill">Live Booking Slots</p>
+          <div class="calendly-inline-host" data-calendly-inline aria-live="polite"></div>
+          <div class="calendly-fallback" data-calendly-fallback hidden>
+            <p>
+              Add your Calendly event URL in site-content.js to render the live scheduler here.
+            </p>
+          </div>
         </article>
       </section>
 
