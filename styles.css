@@ -1293,6 +1293,133 @@ h2 {
   max-width: 520px;
 }
 
+body.site-locked {
+  overflow: hidden;
+}
+
+body.site-locked > *:not(.site-access-gate) {
+  filter: blur(14px) saturate(0.82);
+  pointer-events: none;
+  user-select: none;
+}
+
+.site-access-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(120, 191, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 84% 12%, rgba(255, 118, 84, 0.18), transparent 40%),
+    rgba(6, 10, 19, 0.62);
+  backdrop-filter: blur(14px);
+}
+
+.site-access-gate.is-unlocking {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.site-access-modal {
+  width: min(100%, 460px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  padding: 1.2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(8, 14, 26, 0.88));
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.42);
+}
+
+.site-access-eyebrow {
+  margin: 0;
+  color: var(--accent-3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.site-access-modal h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+}
+
+.site-access-copy {
+  margin: 0.6rem 0 0;
+  color: #d4deef;
+}
+
+.site-access-form {
+  margin-top: 1rem;
+}
+
+.site-access-form label {
+  margin-bottom: 0.4rem;
+}
+
+.site-password-field {
+  position: relative;
+}
+
+.site-password-input {
+  padding-right: 7.1rem;
+}
+
+.site-password-toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e9f2ff;
+  font: inherit;
+  font-size: 0.79rem;
+  font-weight: 700;
+  padding: 0.3rem 0.58rem;
+  cursor: pointer;
+}
+
+.site-password-toggle:hover,
+.site-password-toggle:focus-visible {
+  border-color: rgba(0, 205, 181, 0.6);
+  background: rgba(0, 205, 181, 0.15);
+}
+
+.site-password-toggle-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  display: inline-grid;
+  place-items: center;
+}
+
+.site-password-toggle-icon svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.site-access-error {
+  margin: 0.6rem 0 0;
+  min-height: 1.25em;
+  color: #ffd1d1;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.site-access-submit {
+  width: 100%;
+}
+
 .availability-section {
   margin-top: 1.8rem;
   display: grid;
@@ -1676,6 +1803,10 @@ a:focus-visible {
   .form-row,
   .availability-section {
     grid-template-columns: 1fr;
+  }
+
+  .site-access-modal {
+    padding: 1rem;
   }
 
   .calendly-inline-host {
